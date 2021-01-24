@@ -1,0 +1,19 @@
+.paperDetails {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  min-height: 200px;
+  margin: 1em;
+}
+
+.paperDetails .col1 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  max-width: 500px;
+}
+
+.paperDetails .fos {
+  display: flex;
+  flex-direction: column;
+}
