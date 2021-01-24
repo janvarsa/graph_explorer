@@ -10,7 +10,7 @@ import PaperDetails from "./components/PaperDetails";
 console.log("data", data);
 
 let origin = 4919037;
-let origin_refs = data.find((d) => d._id === origin).references;
+let originRefList = data.find((d) => d._id === origin).references;
 
 function App() {
   console.log("render App");
@@ -18,7 +18,6 @@ function App() {
   const [graphData, setGraphData] = useState();
   const [minCut, setMinCut] = useState(true);
   const [originRefs, setOriginRefs] = useState(false); // toggle to include all origin connections regardless of mincut
-  const [highlight, setHighlight] = useState(4919037);
   const [activeNode, setActiveNode] = useState(
     data.find((d) => d._id === 4919037)
   );
@@ -54,7 +53,7 @@ function App() {
     }
 
     if (originRefs) {
-      origin_refs.forEach((ref) => {
+      originRefList.forEach((ref) => {
         links.push([ref, origin]);
       });
     }
@@ -81,20 +80,19 @@ function App() {
   const onNodeClick = (node) => {
     console.log(node);
     setActiveNode(node);
-    setHighlight(node._id);
   };
 
-  const test = () => {
-    let temp = data.filter((d) => d.n_citation > 200).map((d) => d._id);
-    console.log("temp", temp);
+  // const test = () => {
+  //   let temp = data.filter((d) => d.n_citation > 200).map((d) => d._id);
+  //   console.log("temp", temp);
 
-    let nodes = graphData.nodes.filter((d) => temp.includes(d._id));
-    let links = graphData.links.filter(
-      (d) => temp.includes(d.source._id) && temp.includes(d.target._id)
-    );
+  //   let nodes = graphData.nodes.filter((d) => temp.includes(d._id));
+  //   let links = graphData.links.filter(
+  //     (d) => temp.includes(d.source._id) && temp.includes(d.target._id)
+  //   );
 
-    setGraphData({ nodes: nodes, links: links });
-  };
+  //   setGraphData({ nodes: nodes, links: links });
+  // };
 
   const toggleMinCut = () => {
     setMinCut(!minCut);
@@ -106,11 +104,10 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div style={{ margin: "5em 0 3em 0" }}>
         <h1>Graph Explorer</h1>
       </div>
       <div className="controls">
-        {/* <button onClick={test}>test()</button> */}
         <div
           style={{
             marginRight: "2em",
